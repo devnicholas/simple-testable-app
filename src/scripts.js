@@ -79,11 +79,12 @@ class Forms {
 
 document.addEventListener("DOMContentLoaded", () => {
   const currentPath = window.location.pathname;
-  console.log(currentPath);
 
   const protectedPaths = ["/dashboard.html"];
 
-  if (protectedPaths.includes(currentPath)) {
+  const isProtectedPath = protectedPaths.some(path => currentPath.endsWith(path));
+
+  if (isProtectedPath) {
     if (!Auth.getLoggedInUser()) {
       window.location.href = "index.html";
     }
