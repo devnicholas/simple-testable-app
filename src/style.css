@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 .page-wrapper {
-  @apply container h-screen flex flex-col py-28 justify-between items-center;
+  @apply container mx-auto h-screen flex flex-col py-28 justify-between items-center;
 }
 .logo {
-  @apply border-2 border-black p-4;
+  @apply border-2 border-purple-600 p-4;
 }
 .logo > div {
-  @apply bg-black w-20 h-20;
+  @apply bg-purple-600 w-20 h-20;
 }
 .theme-title {
   @apply font-bold text-6xl;
@@ -21,7 +21,7 @@
   @apply text-gray-600 font-light space-x-4;
 }
 .actions a {
-  @apply underline;
+  @apply font-medium text-sm text-purple-600 hover:underline;
 }
 
 .form-input {
