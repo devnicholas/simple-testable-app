@@ -58,22 +58,26 @@ class Forms {
   }
 
   static init() {
-    this.loginForm.validate();
-    this.createAccountForm.validate();
+    if (this.loginForm.length) {
+      this.loginForm.validate();
+      this.loginForm.on("submit", function (e) {
+        e.preventDefault();
+        if (Forms.loginForm.valid()) {
+          Auth.login();
+        }
+      });
+    }
 
-    this.loginForm.on("submit", function (e) {
-      e.preventDefault();
-      if (Forms.loginForm.valid()) {
-        Auth.login();
-      }
-    });
+    if (this.createAccountForm.length) {
+      this.createAccountForm.validate();
 
-    this.createAccountForm.on("submit", function (e) {
-      e.preventDefault();
-      if (Forms.createAccountForm.valid()) {
-        Auth.createAccount();
-      }
-    });
+      this.createAccountForm.on("submit", function (e) {
+        e.preventDefault();
+        if (Forms.createAccountForm.valid()) {
+          Auth.createAccount();
+        }
+      });
+    }
   }
 }
 
@@ -82,7 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const protectedPaths = ["/dashboard.html"];
 
-  const isProtectedPath = protectedPaths.some(path => currentPath.endsWith(path));
+  const isProtectedPath = protectedPaths.some((path) =>
+    currentPath.endsWith(path)
+  );
 
   if (isProtectedPath) {
     if (!Auth.getLoggedInUser()) {
